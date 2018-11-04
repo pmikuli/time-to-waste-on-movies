@@ -3,15 +3,12 @@ using Microsoft.WindowsAPICodePack.Shell.PropertySystem;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace time_to_waste_on_movies
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             if (args.Length == 1)
             {
@@ -23,14 +20,12 @@ namespace time_to_waste_on_movies
                     {
                         if (file.EndsWith(".mp4") || file.EndsWith("mkv") || file.EndsWith("webm"))
                         {
-                           timeSpan = timeSpan.Add(GetVideoDuration(file));
-
+                            timeSpan = timeSpan.Add(GetVideoDuration(file));
                         }
                     }
 
                     Console.WriteLine("Time to watch all: " + timeSpan);
                     Console.ReadKey();
-
                 }
             }
         }
@@ -43,7 +38,6 @@ namespace time_to_waste_on_movies
             foreach (var dir in dirs)
             {
                 result.AddRange(GetFiles(dir));
-                
             }
 
             var files = Directory.GetFiles(directory);
@@ -65,7 +59,7 @@ namespace time_to_waste_on_movies
                 }
                 catch (NullReferenceException)
                 {
-                    throw;                    
+                    throw;
                 }
             }
         }
