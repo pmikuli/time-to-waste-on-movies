@@ -18,7 +18,7 @@ namespace time_to_waste_on_movies
                     var timeSpan = new TimeSpan();
                     foreach (var file in files)
                     {
-                        if (file.EndsWith(".mp4") || file.EndsWith("mkv") || file.EndsWith("webm"))
+                        if (file.EndsWith(".mp4") || file.EndsWith(".mkv") || file.EndsWith(".webm"))
                         {
                             timeSpan = timeSpan.Add(GetVideoDuration(file));
                         }
