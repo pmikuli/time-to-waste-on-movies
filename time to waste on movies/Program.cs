@@ -21,7 +21,11 @@ namespace time_to_waste_on_movies
                     var timeSpan = new TimeSpan();
                     foreach (var file in files)
                     {
-                        timeSpan.Add(GetVideoDuration(file));
+                        if (file.EndsWith(".mp4") || file.EndsWith("mkv") || file.EndsWith("webm"))
+                        {
+                           timeSpan = timeSpan.Add(GetVideoDuration(file));
+
+                        }
                     }
 
                     Console.WriteLine("Time to watch all: " + timeSpan);
@@ -53,8 +57,16 @@ namespace time_to_waste_on_movies
             using (var shell = ShellObject.FromParsingName(filePath))
             {
                 IShellProperty prop = shell.Properties.System.Media.Duration;
-                var t = (ulong)prop.ValueAsObject;
-                return TimeSpan.FromTicks((long)t);
+                try
+                {
+                    var t = (ulong)prop.ValueAsObject;
+                    var span = TimeSpan.FromTicks((long)t);
+                    return span;
+                }
+                catch (NullReferenceException)
+                {
+                    throw;                    
+                }
             }
         }
     }
